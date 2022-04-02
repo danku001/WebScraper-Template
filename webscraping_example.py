@@ -17,11 +17,12 @@ from requests.auth import HTTPBasicAuth    #Basic authentication credentials
 #getting or loading the webpage content
 link = "https://keithgalli.github.io/web-scraping/example.html"
 link1 = "http://www.google.com/nothere"
+link2 = "https://api.github.com/users/danku001"
 
 #requests implements browser style ssl verification
 try:
     r = requests.get(
-        link,
+        link2,
         auth = HTTPBasicAuth( input('username: '), gp.getpass('Pword: ') )
         )
     r.raise_for_status()
