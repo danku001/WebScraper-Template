@@ -15,6 +15,8 @@ from requests.auth import HTTPBasicAuth    #Basic authentication credentials
                                            #If different kind of authentication then change import
 #import json   #For those sites that use json...but not used.
 
+import time   # to cause it to wait
+
 
 #getting or loading the webpage content
 #link = "https://keithgalli.github.io/web-scraping/example.html"
@@ -66,5 +68,6 @@ print(href_links)
 print(headers)
 
 
+time.sleep(10)
 
 input('Press any key to exit.')
