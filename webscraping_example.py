@@ -15,8 +15,6 @@ from requests.auth import HTTPBasicAuth    #Basic authentication credentials
                                            #If different kind of authentication then change import
 #import json   #For those sites that use json...but not used.
 
-import time   # to cause it to wait
-
 
 #getting or loading the webpage content
 #link = "https://keithgalli.github.io/web-scraping/example.html"
@@ -51,6 +49,7 @@ except requests.exceptions.RequestException as e:
 soup = bs(r.content, features = "html.parser")
 
 print(soup.prettify())
+
 print('Title of the webpage: ', soup.title.string)
 
 #headers in html
@@ -68,6 +67,5 @@ print(href_links)
 print(headers)
 
 
-time.sleep(10)
 
 input('Press any key to exit.')
