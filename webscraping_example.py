@@ -13,18 +13,24 @@ from bs4 import BeautifulSoup as bs
 import getpass as gp
 from requests.auth import HTTPBasicAuth    #Basic authentication credentials
                                            #If different kind of authentication then change import
-#user = input('Enter user for github test: ')
+#import json   #For those sites that use json...but not used.
+
 
 #getting or loading the webpage content
-link = "https://keithgalli.github.io/web-scraping/example.html"
-link1 = "http://www.google.com/nothere"
+#link = "https://keithgalli.github.io/web-scraping/example.html"
+#link1 = "http://www.google.com/nothere"
 #link2 = "https://api.github.com/users/" + user
+#use this link to test basic auth python request https://postman-echo.com/basic-auth
+##username is postman, password is password.
+
+link = input('Enter the url for the website to be scraped: ').strip()
+user = input('Enter user: ').strip()
 
 #requests implements browser style ssl verification
 try:
     r = requests.get(
-        link
-        #auth = HTTPBasicAuth( user, gp.getpass('Pword: ') )
+        link,
+        auth = HTTPBasicAuth( user, gp.getpass('Pword: ') )
         )
     r.raise_for_status()
 except requests.exceptions.HTTPError as err404:
@@ -35,14 +41,14 @@ except requests.exceptions.ConnectionError as errc:
     raise SystemExit(errc)
 except requests.exceptions.RequestException as e:
     #prints an error and calls system exist
-    print('exit')
     raise SystemExit(e)
+
 
 #for html links
 #convert response to beautiful soup object
 soup = bs(r.content, features = "html.parser")
 
-#print(soup.prettify())
+print(soup.prettify())
 print('Title of the webpage: ', soup.title.string)
 
 #headers in html
@@ -53,8 +59,12 @@ headers = [head.string for head in headers ]
 href_links = soup.find('a').get('href')
 
 
-#jsonStuff = r.json()
+#jsonStuff = json.dumps( r.json() )
 
 #print(jsonStuff)
 print(href_links)
 print(headers)
+
+
+
+input('Press any key to exit.')
